@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Alert, View } from "react-native";
+import { useForm } from "@tanstack/react-form";
 
 import { Button } from "~/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
@@ -9,11 +10,10 @@ import { trpc } from "~/utils/api";
 
 export function FeedbackButton() {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
 
   const submitMutation = trpc.feedback.submit.useMutation({
     onSuccess: () => {
-      setMessage("");
+      form.reset();
       setOpen(false);
       Alert.alert("Success", "Thank you for your feedback!");
     },
@@ -22,18 +22,17 @@ export function FeedbackButton() {
     },
   });
 
-  const handleSubmit = () => {
-    const trimmedMessage = message.trim();
-    if (!trimmedMessage) {
-      Alert.alert("Validation", "Please enter your feedback message.");
-      return;
-    }
-
-    submitMutation.mutate({ message: trimmedMessage });
-  };
+  const form = useForm({
+    defaultValues: {
+      message: "",
+    },
+    onSubmit: async ({ value }) => {
+      submitMutation.mutate({ message: value.message.trim() });
+    },
+  });
 
   const handleCancel = () => {
-    setMessage("");
+    form.reset();
     setOpen(false);
   };
 
@@ -44,12 +43,32 @@ export function FeedbackButton() {
       </PopoverTrigger>
       <PopoverContent className="gap-4">
         <Text variant="h4">Send Feedback</Text>
-        <Textarea
-          placeholder="Enter your feedback here..."
-          value={message}
-          onChangeText={setMessage}
-          editable={!submitMutation.isPending}
-        />
+        <form.Field
+          name="message"
+          validators={{
+            onChange: ({ value }) => {
+              const trimmed = value.trim();
+              return trimmed.length === 0 ? "Please enter your feedback message." : undefined;
+            },
+          }}
+        >
+          {(field) => (
+            <>
+              <Textarea
+                placeholder="Enter your feedback here..."
+                value={field.state.value}
+                onChangeText={field.handleChange}
+                onBlur={field.handleBlur}
+                editable={!submitMutation.isPending}
+              />
+              {field.state.meta.errors.length > 0 && (
+                <Text variant="small" className="text-destructive">
+                  {field.state.meta.errors[0]}
+                </Text>
+              )}
+            </>
+          )}
+        </form.Field>
         <View className="flex-row gap-2 justify-end">
           <Button
             variant="outline"
@@ -59,8 +78,8 @@ export function FeedbackButton() {
             Cancel
           </Button>
           <Button
-            onPress={handleSubmit}
-            disabled={submitMutation.isPending || !message.trim()}
+            onPress={() => form.handleSubmit()}
+            disabled={submitMutation.isPending || !form.state.isValid}
           >
             {submitMutation.isPending ? "Sending..." : "Send"}
           </Button>
