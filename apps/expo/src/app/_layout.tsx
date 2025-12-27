@@ -1,9 +1,10 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { PortalHost } from "@rn-primitives/portal";
 
 import { queryClient } from "~/utils/api";
 
-import "../styles.css";
+import "../global.css";
 
 import { QueryClientProvider } from "@tanstack/react-query";
 
@@ -17,6 +18,7 @@ export default function RootLayout() {
           It also allows you to configure your screens 
         */}
       <Stack />
+      <PortalHost />
       <StatusBar />
     </QueryClientProvider>
   );
