@@ -1,10 +1,5 @@
-import { sql } from "@vercel/postgres";
-import { drizzle } from "drizzle-orm/vercel-postgres";
+import { openDatabaseSync } from "expo-sqlite";
+import { drizzle } from "drizzle-orm/expo-sqlite";
 
-import * as schema from "./schema";
-
-export const db = drizzle({
-  client: sql,
-  schema,
-  casing: "snake_case",
-});
+const expo = openDatabaseSync("FightFixer.db");
+export const db = drizzle(expo);

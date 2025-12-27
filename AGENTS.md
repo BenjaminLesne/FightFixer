@@ -1,0 +1,11 @@
+- sacrifice grammar for the sake of concision
+- list any unresolved questions at the end, if any
+- Give the answer first, then explain or restate if useful.
+- When uncertain, say so.
+- Focus on the Expo/React Native app (`apps/expo/`)
+- The Next.js web app (`apps/nextjs/`) can be ignored unless explicitly needed
+- All new features should work on Android and iOS
+- Always use tRPC for API calls
+- Prefer popular libraries over custom code.
+- Store AI-related files (plans, notes, etc.) that shouldn't be versioned in `.ai/` folder
+

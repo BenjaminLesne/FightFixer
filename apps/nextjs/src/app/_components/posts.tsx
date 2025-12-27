@@ -7,7 +7,6 @@ import {
 } from "@tanstack/react-query";
 
 import type { RouterOutputs } from "@acme/api";
-import { CreatePostSchema } from "@acme/db/schema";
 import { cn } from "@acme/ui";
 import { Button } from "@acme/ui/button";
 import {
@@ -22,6 +21,7 @@ import { Input } from "@acme/ui/input";
 import { toast } from "@acme/ui/toast";
 
 import { useTRPC } from "~/trpc/react";
+import { CreatePostSchema } from "../../../../../packages/db/dist/local/schema";
 
 export function CreatePostForm() {
   const trpc = useTRPC();

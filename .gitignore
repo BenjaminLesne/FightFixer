@@ -50,3 +50,6 @@ dist/
 
 # turbo
 .turbo
+
+# AI-related files (not versioned)
+.ai/

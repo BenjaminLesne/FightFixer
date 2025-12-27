@@ -30,9 +30,11 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.6",
     "@vercel/postgres": "^0.10.0",
-    "drizzle-orm": "^0.44.1",
+    "drizzle-orm": "^0.44.5",
     "drizzle-zod": "^0.8.2",
+    "expo-sqlite": "^16.0.7",
     "zod": "catalog:"
   },
   "devDependencies": {

@@ -2,8 +2,8 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { z } from "zod/v4";
 
 import { desc, eq } from "@acme/db";
-import { CreatePostSchema, Post } from "@acme/db/schema";
 
+import { CreatePostSchema, Post } from "../../../db/dist/local/schema";
 import { protectedProcedure, publicProcedure } from "../trpc";
 
 export const postRouter = {
