@@ -13,7 +13,7 @@ const getEnvVar = (key: string): string => {
 };
 
 export const feedbackRouter = {
-  submit: publicProcedure
+  create: publicProcedure
     .input(z.object({ message: z.string().min(1) }))
     .mutation(async ({ input }) => {
       try {

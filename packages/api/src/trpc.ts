@@ -10,7 +10,7 @@ import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { z, ZodError } from "zod/v4";
 
-import { db } from "../../db/dist/local/client";
+import { db } from "@acme/db/client";
 
 /**
  * 1. CONTEXT

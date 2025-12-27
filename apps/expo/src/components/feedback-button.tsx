@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Alert, View } from "react-native";
 import { useForm } from "@tanstack/react-form";
+import { useMutation } from "@tanstack/react-query";
 
 import { Button } from "~/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
@@ -11,25 +12,27 @@ import { trpc } from "~/utils/api";
 export function FeedbackButton() {
   const [open, setOpen] = useState(false);
 
-  const submitMutation = trpc.feedback.submit.useMutation({
-    onSuccess: () => {
-      form.reset();
-      setOpen(false);
-      Alert.alert("Success", "Thank you for your feedback!");
-    },
-    onError: (error) => {
-      Alert.alert("Error", error.message || "Failed to send feedback. Please try again later.");
-    },
-  });
-
   const form = useForm({
     defaultValues: {
       message: "",
     },
-    onSubmit: async ({ value }) => {
+    onSubmit: ({ value }) => {
       submitMutation.mutate({ message: value.message.trim() });
     },
   });
+
+  const submitMutation = useMutation(
+    trpc.feedback.create.mutationOptions({
+      onSuccess: () => {
+        form.reset();
+        setOpen(false);
+        Alert.alert("Success", "Thank you for your feedback!");
+      },
+      onError: (error: { message?: string }) => {
+        Alert.alert("Error", error.message ?? "Failed to send feedback. Please try again later.");
+      },
+    }),
+  );
 
   const handleCancel = () => {
     form.reset();
