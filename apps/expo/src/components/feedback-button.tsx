@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Alert, View } from "react-native";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from "@tanstack/react-query";
+import type { TriggerRef } from "@rn-primitives/popover";
 
 import { Button } from "~/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
@@ -10,7 +11,11 @@ import { Textarea } from "~/components/ui/textarea";
 import { trpc } from "~/utils/api";
 
 export function FeedbackButton() {
-  const [open, setOpen] = useState(false);
+  const triggerRef = useRef<TriggerRef>(null);
+
+  const closePopover = () => {
+    triggerRef.current?.close();
+  };
 
   const form = useForm({
     defaultValues: {
@@ -25,7 +30,7 @@ export function FeedbackButton() {
     trpc.feedback.create.mutationOptions({
       onSuccess: () => {
         form.reset();
-        setOpen(false);
+        closePopover();
         Alert.alert("Success", "Thank you for your feedback!");
       },
       onError: (error: { message?: string }) => {
@@ -36,13 +41,13 @@ export function FeedbackButton() {
 
   const handleCancel = () => {
     form.reset();
-    setOpen(false);
+    closePopover();
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="outline">Send Feedback</Button>
+    <Popover>
+      <PopoverTrigger ref={triggerRef} asChild>
+        <Button variant="outline"><Text>Send Feedback</Text></Button>
       </PopoverTrigger>
       <PopoverContent className="gap-4">
         <Text variant="h4">Send Feedback</Text>
@@ -78,13 +83,13 @@ export function FeedbackButton() {
             onPress={handleCancel}
             disabled={submitMutation.isPending}
           >
-            Cancel
+            <Text>Cancel</Text>
           </Button>
           <Button
             onPress={() => form.handleSubmit()}
             disabled={submitMutation.isPending || !form.state.isValid}
           >
-            {submitMutation.isPending ? "Sending..." : "Send"}
+            <Text>{submitMutation.isPending ? "Sending..." : "Send"}</Text>
           </Button>
         </View>
       </PopoverContent>

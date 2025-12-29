@@ -40,8 +40,8 @@ export default function RootLayout() {
           It also allows you to configure your screens 
         */}
       <Stack />
-      <PortalHost />
       <StatusBar />
+      <PortalHost />
     </QueryClientProvider>
   );
 }
