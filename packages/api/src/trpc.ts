@@ -10,7 +10,7 @@ import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 import { z, ZodError } from "zod/v4";
 
-import { db } from "@acme/db/client";
+// import { db } from "@acme/db/client";
 
 /**
  * 1. CONTEXT
@@ -27,7 +27,7 @@ import { db } from "@acme/db/client";
 
 export const createTRPCContext = () => {
   return {
-    db,
+    // db,
   };
 };
 /**
