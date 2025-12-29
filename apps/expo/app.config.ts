@@ -2,9 +2,9 @@ import type { ConfigContext, ExpoConfig } from "expo/config";
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "expo",
-  slug: "expo",
-  scheme: "expo",
+  name: "FightFixer",
+  slug: "fightfixer",
+  scheme: "fightfixer",
   version: "0.1.0",
   orientation: "portrait",
   icon: "./assets/icon-light.png",
@@ -15,7 +15,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   newArchEnabled: true,
   assetBundlePatterns: ["**/*"],
   ios: {
-    bundleIdentifier: "your.bundle.identifier",
+    bundleIdentifier: "com.benjaminlesne.fightfixer",
     supportsTablet: true,
     icon: {
       light: "./assets/icon-light.png",
@@ -23,18 +23,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
   },
   android: {
-    package: "your.bundle.identifier",
+    package: "com.benjaminlesne.fightfixer",
     adaptiveIcon: {
       foregroundImage: "./assets/icon-light.png",
       backgroundColor: "#1F104A",
     },
     edgeToEdgeEnabled: true,
   },
-  // extra: {
-  //   eas: {
-  //     projectId: "your-eas-project-id",
-  //   },
-  // },
+  extra: {
+    eas: {
+      projectId: "6b78744d-f752-45a8-91ed-d69bee9c2cf0",
+    },
+  },
   experiments: {
     tsconfigPaths: true,
     typedRoutes: true,

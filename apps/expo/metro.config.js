@@ -12,6 +12,9 @@ const config = withTurborepoManagedCache(
     inlineRem: 16,
   }),
 );
+
+config.resolver.sourceExts.push('sql');
+
 module.exports = config;
 
 /**
