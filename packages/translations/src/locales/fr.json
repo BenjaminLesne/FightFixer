@@ -1,0 +1,72 @@
+{
+  "common": {
+    "success": "Succès",
+    "error": "Erreur",
+    "cancel": "Annuler",
+    "send": "Envoyer",
+    "sending": "Envoi...",
+    "save": "Enregistrer",
+    "date": "Date",
+    "home": "Page d'accueil"
+  },
+  "migration": {
+    "error": "Erreur de migration : {{message}}",
+    "inProgress": "Migration en cours..."
+  },
+  "feedback": {
+    "title": "Envoyer un commentaire",
+    "button": "Envoyer un commentaire",
+    "placeholder": "Entrez votre commentaire ici...",
+    "success": "Merci pour votre commentaire !",
+    "error": "Échec de l'envoi. Veuillez réessayer plus tard.",
+    "validation": {
+      "required": "Veuillez entrer votre message."
+    }
+  },
+  "fight": {
+    "title": "Enregistrer une dispute",
+    "save": "Enregistrer la dispute",
+    "success": "Dispute enregistrée.",
+    "error": "Échec de l'enregistrement",
+    "fields": {
+      "partner": {
+        "label": "Avec qui vous disputez-vous ?",
+        "placeholder": "Nom du partenaire"
+      },
+      "date": {
+        "label": "Date"
+      },
+      "name": {
+        "label": "Nom de cette dispute",
+        "placeholder": "ex : Dispute sur la vaisselle"
+      },
+      "whatHappened": {
+        "label": "Que s'est-il passé ? (faits uniquement)",
+        "placeholder": "Décrivez objectivement ce qui s'est passé..."
+      },
+      "myPov": {
+        "label": "Mon point de vue, ce que j'ai ressenti",
+        "placeholder": "Comment vous êtes-vous senti ? Quelle est votre perspective ?"
+      },
+      "perceivedPartnerPov": {
+        "label": "Ce que je pense être le point de vue de mon partenaire",
+        "placeholder": "Que pensez-vous qu'il/elle a ressenti ?"
+      },
+      "intensity": {
+        "label": "Intensité",
+        "low": "Calme",
+        "high": "Cris"
+      },
+      "seriousness": {
+        "label": "Gravité",
+        "low": "Mineur",
+        "high": "Majeur"
+      },
+      "conclusion": {
+        "label": "Conclusion / comment éviter ça",
+        "placeholder": "Qu'est-ce qui a été résolu ? Comment éviter ça ?"
+      }
+    }
+  }
+}
+

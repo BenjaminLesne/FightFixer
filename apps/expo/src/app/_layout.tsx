@@ -4,6 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { PortalHost } from "@rn-primitives/portal";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 
+import { useTranslation } from "@acme/translations";
+
 import { db } from "~/lib/local-db";
 import { queryClient } from "~/utils/api";
 import migrations from "../../drizzle/migrations";
@@ -15,12 +17,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 export default function RootLayout() {
+  const { t } = useTranslation();
   const { success, error } = useMigrations(db, migrations);
 
   if (error) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text>Migration error: {error.message}</Text>
+        <Text>{t("migration.error", { message: error.message })}</Text>
       </View>
     );
   }
@@ -28,7 +31,7 @@ export default function RootLayout() {
   if (!success) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text>Migration is in progress...</Text>
+        <Text>{t("migration.inProgress")}</Text>
       </View>
     );
   }

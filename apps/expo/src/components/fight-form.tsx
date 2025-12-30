@@ -1,6 +1,8 @@
 import { Alert, View } from "react-native";
 import { useForm } from "@tanstack/react-form";
 
+import { useTranslation } from "@acme/translations";
+
 import { fightFormSchema } from "~/lib/fight-schema";
 import { db } from "~/lib/local-db";
 import { fights } from "~/lib/local-schema";
@@ -13,6 +15,8 @@ import { Text } from "./ui/text";
 import { Textarea } from "./ui/textarea";
 
 export function FightForm() {
+  const { t } = useTranslation();
+
   const form = useForm({
     defaultValues: {
       partner: "",
@@ -40,10 +44,13 @@ export function FightForm() {
           conclusion: value.conclusion || undefined,
         });
         form.reset();
-        Alert.alert("Success", "Fight logged.");
+        Alert.alert(t("common.success"), t("fight.success"));
       } catch (e) {
         console.error("Insert error:", e);
-        Alert.alert("Error", e instanceof Error ? e.message : "Failed to save");
+        Alert.alert(
+          t("common.error"),
+          e instanceof Error ? e.message : t("fight.error"),
+        );
       }
     },
   });
@@ -51,14 +58,14 @@ export function FightForm() {
   return (
     <View>
       <View className="gap-4 p-4">
-        <Text variant="h4">Log a Fight</Text>
+        <Text variant="h4">{t("fight.title")}</Text>
 
         <form.Field name="partner">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Who are you fighting with?</Label>
+              <Label>{t("fight.fields.partner.label")}</Label>
               <Input
-                placeholder="Partner name"
+                placeholder={t("fight.fields.partner.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -70,7 +77,7 @@ export function FightForm() {
         <form.Field name="date">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Date</Label>
+              <Label>{t("fight.fields.date.label")}</Label>
               <CalendarPicker
                 value={field.state.value}
                 onChange={field.handleChange}
@@ -89,9 +96,9 @@ export function FightForm() {
         <form.Field name="name">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Name for this fight</Label>
+              <Label>{t("fight.fields.name.label")}</Label>
               <Input
-                placeholder="e.g., Dishes argument"
+                placeholder={t("fight.fields.name.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -103,9 +110,9 @@ export function FightForm() {
         <form.Field name="whatHappened">
           {(field) => (
             <View className="gap-1.5">
-              <Label>What happened? (facts only)</Label>
+              <Label>{t("fight.fields.whatHappened.label")}</Label>
               <Textarea
-                placeholder="Describe what happened objectively..."
+                placeholder={t("fight.fields.whatHappened.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -124,9 +131,9 @@ export function FightForm() {
         <form.Field name="myPov">
           {(field) => (
             <View className="gap-1.5">
-              <Label>My POV, how I felt, my opinion</Label>
+              <Label>{t("fight.fields.myPov.label")}</Label>
               <Textarea
-                placeholder="How did you feel? What's your perspective?"
+                placeholder={t("fight.fields.myPov.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -138,9 +145,9 @@ export function FightForm() {
         <form.Field name="perceivedPartnerPov">
           {(field) => (
             <View className="gap-1.5">
-              <Label>What I think my partner's POV is</Label>
+              <Label>{t("fight.fields.perceivedPartnerPov.label")}</Label>
               <Textarea
-                placeholder="What do you think they felt/thought?"
+                placeholder={t("fight.fields.perceivedPartnerPov.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -152,11 +159,14 @@ export function FightForm() {
         <form.Field name="intensity">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Intensity</Label>
+              <Label>{t("fight.fields.intensity.label")}</Label>
               <Rating
                 value={field.state.value}
                 onChange={field.handleChange}
-                labels={{ low: "Calm", high: "Screaming" }}
+                labels={{
+                  low: t("fight.fields.intensity.low"),
+                  high: t("fight.fields.intensity.high"),
+                }}
               />
             </View>
           )}
@@ -165,11 +175,14 @@ export function FightForm() {
         <form.Field name="seriousness">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Seriousness</Label>
+              <Label>{t("fight.fields.seriousness.label")}</Label>
               <Rating
                 value={field.state.value}
                 onChange={field.handleChange}
-                labels={{ low: "Minor", high: "Major" }}
+                labels={{
+                  low: t("fight.fields.seriousness.low"),
+                  high: t("fight.fields.seriousness.high"),
+                }}
               />
             </View>
           )}
@@ -178,9 +191,9 @@ export function FightForm() {
         <form.Field name="conclusion">
           {(field) => (
             <View className="gap-1.5">
-              <Label>Conclusion / how to prevent this</Label>
+              <Label>{t("fight.fields.conclusion.label")}</Label>
               <Textarea
-                placeholder="What was resolved? How to avoid this?"
+                placeholder={t("fight.fields.conclusion.placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -190,7 +203,7 @@ export function FightForm() {
         </form.Field>
 
         <Button onPress={() => form.handleSubmit()}>
-          <Text>Save Fight</Text>
+          <Text>{t("fight.save")}</Text>
         </Button>
       </View>
     </View>

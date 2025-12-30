@@ -1,0 +1,72 @@
+{
+  "common": {
+    "success": "Success",
+    "error": "Error",
+    "cancel": "Cancel",
+    "send": "Send",
+    "sending": "Sending...",
+    "save": "Save",
+    "date": "Date",
+    "home": "Home Page"
+  },
+  "migration": {
+    "error": "Migration error: {{message}}",
+    "inProgress": "Migration is in progress..."
+  },
+  "feedback": {
+    "title": "Send Feedback",
+    "button": "Send Feedback",
+    "placeholder": "Enter your feedback here...",
+    "success": "Thank you for your feedback!",
+    "error": "Failed to send feedback. Please try again later.",
+    "validation": {
+      "required": "Please enter your feedback message."
+    }
+  },
+  "fight": {
+    "title": "Log a Fight",
+    "save": "Save Fight",
+    "success": "Fight logged.",
+    "error": "Failed to save",
+    "fields": {
+      "partner": {
+        "label": "Who are you fighting with?",
+        "placeholder": "Partner name"
+      },
+      "date": {
+        "label": "Date"
+      },
+      "name": {
+        "label": "Name for this fight",
+        "placeholder": "e.g., Dishes argument"
+      },
+      "whatHappened": {
+        "label": "What happened? (facts only)",
+        "placeholder": "Describe what happened objectively..."
+      },
+      "myPov": {
+        "label": "My POV, how I felt, my opinion",
+        "placeholder": "How did you feel? What's your perspective?"
+      },
+      "perceivedPartnerPov": {
+        "label": "What I think my partner's POV is",
+        "placeholder": "What do you think they felt/thought?"
+      },
+      "intensity": {
+        "label": "Intensity",
+        "low": "Calm",
+        "high": "Screaming"
+      },
+      "seriousness": {
+        "label": "Seriousness",
+        "low": "Minor",
+        "high": "Major"
+      },
+      "conclusion": {
+        "label": "Conclusion / how to prevent this",
+        "placeholder": "What was resolved? How to avoid this?"
+      }
+    }
+  }
+}
+
