@@ -27,19 +27,24 @@ export function FightForm() {
     },
     validators: { onChange: fightFormSchema },
     onSubmit: async ({ value }) => {
-      await db.insert(fights).values({
-        partner: value.partner || undefined,
-        date: value.date,
-        name: value.name || undefined,
-        whatHappened: value.whatHappened || undefined,
-        myPov: value.myPov || undefined,
-        perceivedPartnerPov: value.perceivedPartnerPov || undefined,
-        intensity: value.intensity,
-        seriousness: value.seriousness,
-        conclusion: value.conclusion || undefined,
-      });
-      form.reset();
-      Alert.alert("Success", "Fight logged.");
+      try {
+        await db.insert(fights).values({
+          partner: value.partner || undefined,
+          date: value.date,
+          name: value.name || undefined,
+          whatHappened: value.whatHappened || undefined,
+          myPov: value.myPov || undefined,
+          perceivedPartnerPov: value.perceivedPartnerPov || undefined,
+          intensity: value.intensity,
+          seriousness: value.seriousness,
+          conclusion: value.conclusion || undefined,
+        });
+        form.reset();
+        Alert.alert("Success", "Fight logged.");
+      } catch (e) {
+        console.error("Insert error:", e);
+        Alert.alert("Error", e instanceof Error ? e.message : "Failed to save");
+      }
     },
   });
 
@@ -184,10 +189,7 @@ export function FightForm() {
           )}
         </form.Field>
 
-        <Button
-          onPress={() => form.handleSubmit()}
-          disabled={!form.state.canSubmit}
-        >
+        <Button onPress={() => form.handleSubmit()}>
           <Text>Save Fight</Text>
         </Button>
       </View>

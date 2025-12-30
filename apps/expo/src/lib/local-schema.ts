@@ -1,9 +1,7 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const fights = sqliteTable("fights", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   partner: text("partner"),
   date: text("date").notNull(),
   name: text("name"),

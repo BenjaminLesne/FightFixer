@@ -1,12 +1,12 @@
+import { Text, View } from "react-native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { PortalHost } from "@rn-primitives/portal";
-import { View, Text } from "react-native";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 
+import { db } from "~/lib/local-db";
 import { queryClient } from "~/utils/api";
-import { db } from "@acme/db/client";
-import migrations from "@acme/db/migrations";
+import migrations from "../../drizzle/migrations";
 
 import "../global.css";
 
