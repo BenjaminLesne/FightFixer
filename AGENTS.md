@@ -9,4 +9,5 @@
 - Prefer popular libraries over custom code.
 - Store AI-related files (plans, notes, etc.) that shouldn't be versioned in `.ai/` folder
 - Do not ignore eslint or typescript rules. If you can't fix it, warn the user.
+- Do not use useMemo or useCallback
 
