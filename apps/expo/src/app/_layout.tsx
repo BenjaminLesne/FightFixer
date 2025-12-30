@@ -23,7 +23,7 @@ export default function RootLayout() {
   if (error) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text>{t("migration.error", { message: error.message })}</Text>
+        <Text>{t("migration:error", { message: error.message })}</Text>
       </View>
     );
   }
@@ -31,7 +31,7 @@ export default function RootLayout() {
   if (!success) {
     return (
       <View className="flex-1 items-center justify-center">
-        <Text>{t("migration.inProgress")}</Text>
+        <Text>{t("migration:inProgress")}</Text>
       </View>
     );
   }

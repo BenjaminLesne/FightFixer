@@ -7,7 +7,7 @@ import fr from "./locales/fr.json";
 export const resources = {
   en,
   fr,
-} as const;
+};
 
 export const defaultNS = "common";
 

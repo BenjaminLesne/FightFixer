@@ -38,10 +38,10 @@ export function FeedbackButton() {
       onSuccess: () => {
         form.reset();
         closePopover();
-        Alert.alert(t("common.success"), t("feedback.success"));
+        Alert.alert(t("success"), t("feedback:success"));
       },
       onError: (error: { message?: string }) => {
-        Alert.alert(t("common.error"), error.message ?? t("feedback.error"));
+        Alert.alert(t("error"), error.message ?? t("feedback:error"));
       },
     }),
   );
@@ -55,18 +55,18 @@ export function FeedbackButton() {
     <Popover>
       <PopoverTrigger ref={triggerRef} asChild>
         <Button variant="outline">
-          <Text>{t("feedback.button")}</Text>
+          <Text>{t("feedback:button")}</Text>
         </Button>
       </PopoverTrigger>
       <PopoverContent className="gap-4">
-        <Text variant="h4">{t("feedback.title")}</Text>
+        <Text variant="h4">{t("feedback:title")}</Text>
         <form.Field
           name="message"
           validators={{
             onChange: ({ value }) => {
               const trimmed = value.trim();
               return trimmed.length === 0
-                ? t("feedback.validation.required")
+                ? t("feedback:validation.required")
                 : undefined;
             },
           }}
@@ -74,7 +74,7 @@ export function FeedbackButton() {
           {(field) => (
             <>
               <Textarea
-                placeholder={t("feedback.placeholder")}
+                placeholder={t("feedback:placeholder")}
                 value={field.state.value}
                 onChangeText={field.handleChange}
                 onBlur={field.handleBlur}
@@ -94,17 +94,13 @@ export function FeedbackButton() {
             onPress={handleCancel}
             disabled={submitMutation.isPending}
           >
-            <Text>{t("common.cancel")}</Text>
+            <Text>{t("cancel")}</Text>
           </Button>
           <Button
             onPress={() => form.handleSubmit()}
             disabled={submitMutation.isPending || !form.state.isValid}
           >
-            <Text>
-              {submitMutation.isPending
-                ? t("common.sending")
-                : t("common.send")}
-            </Text>
+            <Text>{submitMutation.isPending ? t("sending") : t("send")}</Text>
           </Button>
         </View>
       </PopoverContent>

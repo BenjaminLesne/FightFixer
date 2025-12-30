@@ -17,7 +17,7 @@ export default function Index() {
       keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 50}
     >
       <SafeAreaView className="flex-1 bg-background">
-        <Stack.Screen options={{ title: t("common.home") }} />
+        <Stack.Screen options={{ title: t("home") }} />
         <ScrollView className="flex-1">
           <View className="p-4">
             <FeedbackButton />
