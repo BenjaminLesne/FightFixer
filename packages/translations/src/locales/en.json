@@ -67,6 +67,11 @@
         "placeholder": "What was resolved? How to avoid this?"
       }
     }
+  },
+  "fightList": {
+    "title": "Fight History",
+    "empty": "No fights logged yet.",
+    "noName": "Untitled",
+    "noValue": "-"
   }
 }
-

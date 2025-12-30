@@ -67,6 +67,12 @@
         "placeholder": "Qu'est-ce qui a été résolu ? Comment éviter ça ?"
       }
     }
+  },
+  "fightList": {
+    "title": "Historique des disputes",
+    "empty": "Aucune dispute enregistrée.",
+    "noName": "Sans titre",
+    "noValue": "-"
   }
 }
 
