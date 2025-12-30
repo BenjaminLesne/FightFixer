@@ -1,10 +1,11 @@
-import { Alert, ScrollView, View } from "react-native";
+import { Alert, View } from "react-native";
 import { useForm } from "@tanstack/react-form";
 
 import { fightFormSchema } from "~/lib/fight-schema";
 import { db } from "~/lib/local-db";
 import { fights } from "~/lib/local-schema";
 import { Button } from "./ui/button";
+import { CalendarPicker } from "./ui/calendar-picker";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Rating } from "./ui/rating";
@@ -43,7 +44,7 @@ export function FightForm() {
   });
 
   return (
-    <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
+    <View>
       <View className="gap-4 p-4">
         <Text variant="h4">Log a Fight</Text>
 
@@ -65,11 +66,9 @@ export function FightForm() {
           {(field) => (
             <View className="gap-1.5">
               <Label>Date</Label>
-              <Input
-                placeholder="YYYY-MM-DD"
+              <CalendarPicker
                 value={field.state.value}
-                onChangeText={field.handleChange}
-                onBlur={field.handleBlur}
+                onChange={field.handleChange}
               />
               {field.state.meta.errors[0] && (
                 <Text variant="small" className="text-destructive">
@@ -192,6 +191,6 @@ export function FightForm() {
           <Text>Save Fight</Text>
         </Button>
       </View>
-    </ScrollView>
+    </View>
   );
 }

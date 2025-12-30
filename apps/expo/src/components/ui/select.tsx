@@ -65,7 +65,7 @@ function Select({
                   label={option.label}
                   className="flex-row items-center rounded-sm px-2 py-1.5 active:bg-accent"
                 >
-                  {option.label}
+                  <Text>{option.label}</Text>
                   <SelectPrimitive.ItemIndicator className="ml-auto">
                     <Text>✓</Text>
                   </SelectPrimitive.ItemIndicator>
