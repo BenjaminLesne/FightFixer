@@ -1,20 +1,22 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
-import { createJiti } from "jiti";
 
-import type { Env } from "~/lib/env";
+const APP_VARIANT = process.env.APP_VARIANT as
+  | "development"
+  | "preview"
+  | "production"
+  | undefined;
 
-const jiti = createJiti(import.meta.url);
-const { env } = (await jiti.import("./src/lib/env")) as { env: Env };
+console.log("[app.config] APP_VARIANT:", APP_VARIANT);
 
 const getAppName = () => {
-  if (env.APP_VARIANT === "development") return "FightFixer (Dev)";
-  if (env.APP_VARIANT === "preview") return "FightFixer (Preview)";
+  if (APP_VARIANT === "development") return "FightFixer (Dev)";
+  if (APP_VARIANT === "preview") return "FightFixer (Preview)";
   return "FightFixer";
 };
 
 const getPackageSuffix = () => {
-  if (env.APP_VARIANT === "development") return ".dev";
-  if (env.APP_VARIANT === "preview") return ".preview";
+  if (APP_VARIANT === "development") return ".dev";
+  if (APP_VARIANT === "preview") return ".preview";
   return "";
 };
 

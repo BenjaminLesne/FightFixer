@@ -8,13 +8,12 @@ const envSchema = z.object({
   APP_VARIANT: z.enum(["development", "preview", "production"]),
 });
 
-const formatError = (error: z.ZodError) => {
+const formatError = (error: z.ZodError, input: Record<string, unknown>) => {
   const errors = error.issues.map((issue) => {
     const path = issue.path.join(".") || "(root)";
+    const key = issue.path[0] as string;
     const received =
-      "received" in issue
-        ? ` (received: ${JSON.stringify(issue.received)})`
-        : "";
+      key in input ? ` (received: ${JSON.stringify(input[key])})` : "";
     return `  ✗ ${path}: ${issue.message}${received}`;
   });
 
@@ -29,13 +28,15 @@ const formatError = (error: z.ZodError) => {
   ].join("\n");
 };
 
-const parsed = envSchema.safeParse({
+const input = {
   NODE_ENV: process.env.NODE_ENV,
   APP_VARIANT: process.env.APP_VARIANT,
-});
+};
+
+const parsed = envSchema.safeParse(input);
 
 if (!parsed.success) {
-  const message = formatError(parsed.error);
+  const message = formatError(parsed.error, input);
   console.error(message);
   throw new Error(message);
 }
