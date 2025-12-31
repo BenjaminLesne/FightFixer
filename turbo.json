@@ -48,6 +48,7 @@
   "globalEnv": ["PORT"],
   "globalPassThroughEnv": [
     "NODE_ENV",
+    "APP_VARIANT",
     "CI",
     "VERCEL",
     "VERCEL_ENV",
