@@ -1,6 +1,10 @@
 import type { ConfigContext, ExpoConfig } from "expo/config";
+import { createJiti } from "jiti";
 
-import { env } from "./src/lib/env";
+import type { Env } from "~/lib/env";
+
+const jiti = createJiti(import.meta.url);
+const { env } = (await jiti.import("./src/lib/env")) as { env: Env };
 
 const getAppName = () => {
   if (env.APP_VARIANT === "development") return "FightFixer (Dev)";
