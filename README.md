@@ -1,11 +1,5 @@
 # create-t3-turbo
 
-> [!NOTE]
->
-> create-t3-turbo now uses better-auth for authentication!
-> Look out for bugs as we're working through the last issues,
-> especially, the oauth proxy might not play very nice with Expo
-> so you might need to disable that in [`@acme/auth`](./packages/auth/src/index.ts)
 
 ## Installation
 
@@ -53,8 +47,6 @@ apps
 packages
   ├─ api
   |   └─ tRPC v11 router definition
-  ├─ auth
-  |   └─ Authentication using better-auth.
   ├─ db
   |   └─ Typesafe db calls using Drizzle & Supabase
   └─ ui
@@ -119,21 +111,7 @@ pnpm db:push
 
 3. Run `pnpm dev` at the project root folder.
 
-### 3. Configuring Better-Auth to work with Expo
-
-In order to get Better-Auth to work with Expo, you must either:
-
-#### Deploy the Auth Proxy (RECOMMENDED)
-
-Better-auth comes with an [auth proxy plugin](https://www.better-auth.com/docs/plugins/oauth-proxy). By deploying the Next.js app, you can get OAuth working in preview deployments and development for Expo apps.
-
-By using the proxy plugin, the Next.js apps will forward any auth requests to the proxy server, which will handle the OAuth flow and then redirect back to the Next.js app. This makes it easy to get OAuth working since you'll have a stable URL that is publicly accessible and doesn't change for every deployment and doesn't rely on what port the app is running on. So if port 3000 is taken and your Next.js app starts at port 3001 instead, your auth should still work without having to reconfigure the OAuth provider.
-
-#### Add your local IP to your OAuth provider
-
-You can alternatively add your local IP (e.g. `192.168.x.y:$PORT`) to your OAuth provider. This may not be as reliable as your local IP may change when you change networks. Some OAuth providers may also only support a single callback URL for each app making this approach unviable for some providers (e.g. GitHub).
-
-### 4a. When it's time to add a new UI component
+### 3. When it's time to add a new UI component
 
 Run the `ui-add` script to add a new UI component using the interactive `shadcn/ui` CLI:
 
@@ -143,7 +121,7 @@ pnpm ui-add
 
 When the component(s) has been installed, you should be good to go and start using it in your app.
 
-### 4b. When it's time to add a new package
+### 4. When it's time to add a new package
 
 To add a new package, simply run `pnpm turbo gen init` in the monorepo root. This will prompt you for a package name as well as if you want to install any dependencies to the new package (of course you can also do this yourself later).
 
@@ -181,10 +159,6 @@ Let's deploy the Next.js application to [Vercel](https://vercel.com). If you've 
 2. Add your `POSTGRES_URL` environment variable.
 
 3. Done! Your app should successfully deploy. Assign your domain and use that instead of `localhost` for the `url` in the Expo app so that your Expo app can communicate with your backend when you are not in development.
-
-### Auth Proxy
-
-The auth proxy comes as a better-auth plugin. This is required for the Next.js app to be able to authenticate users in preview deployments. The auth proxy is not used for OAuth request in production deployments. The easiest way to get it running is to deploy the Next.js app to vercel.
 
 ### Expo
 
