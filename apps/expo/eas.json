@@ -19,12 +19,15 @@
     "preview": {
       "extends": "base",
       "distribution": "internal",
-      "ios": {
-        "simulator": true
+      "android": {
+        "buildType": "apk"
       }
     },
     "production": {
-      "extends": "base"
+      "extends": "base",
+      "android": {
+        "buildType": "app-bundle"
+      }
     }
   },
   "submit": {
